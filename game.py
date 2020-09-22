@@ -1,12 +1,14 @@
+"""
+"""
 import os
 from random import randrange
 from time import sleep
 
 from _ships import _build_random_fleet
-from _base import Player, LETTERS, HELP, CONFUSED
+from _base import Player, LETTERS, HELP, CONFUSED, _display
 
 
-if __name__ == '__main__':
+def game():
 	test_game = False # режим автоигры
 
 	print('Введите Ваше имя:')
@@ -57,11 +59,12 @@ if __name__ == '__main__':
 					field = command[1]
 					
 					if field:
-						letter = field[0].upper()
+						letter = field[0]
+						letter_upper = field[0].upper()
 						
-						if letter != ' ' and letter in LETTERS:
-							x = LETTERS.index(letter)
-							field = field.replace(letter.lower(), '')
+						if letter != ' ' and letter_upper in LETTERS:
+							x = LETTERS.index(letter_upper)
+							field = field.replace(letter, '')
 							if field:
 								try:
 									y = int(field)
@@ -76,10 +79,10 @@ if __name__ == '__main__':
 				print(CONFUSED)
 
 			if cmd == 'fleet':
-				active_player._show_fleet()
+				_display(active_player.fleet, active_player.lost, 'fleet')
 
 			if cmd == 'shots':
-				active_player._show_shots()
+				_display(active_player.hits, active_player.shots, 'shots')
 
 			if cmd == 'cls':
 				os.system('cls')
@@ -127,3 +130,7 @@ if __name__ == '__main__':
 				active_player.shots.append(target)
 				active_player, inactive_player = inactive_player, active_player
 			swapped = True
+
+
+if __name__ == '__main__':
+	game()
