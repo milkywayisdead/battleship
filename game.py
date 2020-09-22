@@ -120,9 +120,9 @@ def game():
 
 					print('Результаты:')
 					print(f'Флот {active_player}:')
-					active_player._show_fleet()
+					active_player._display(active_player.fleet, active_player.lost)
 					print(f'Флот {inactive_player}:')
-					inactive_player._show_fleet()
+					inactive_player._display(inactive_player.fleet, inactive_player.lost)
 					break
 
 			else:
